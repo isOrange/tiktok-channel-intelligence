@@ -1,31 +1,10 @@
-# Test your FastAPI endpoints
+# TikTok Channel Intelligence API
 
 ### 根路径
 GET http://127.0.0.1:8000/
 
 ### 健康检查
 GET http://127.0.0.1:8000/health
-
-
-### 查询用户列表
-GET http://127.0.0.1:8000/users
-
-### 查询单个用户
-GET http://127.0.0.1:8000/users/1
-
-### 查询不存在的用户
-GET http://127.0.0.1:8000/users/999
-
-### 创建用户
-POST http://127.0.0.1:8000/users
-Content-Type: application/json
-
-{
-  "username": "admin",
-  "password": "123456",
-  "email": "admin@example.com"
-}
-
 
 ### 登录成功
 POST http://127.0.0.1:8000/auth/login
@@ -48,3 +27,41 @@ Content-Type: application/json
 ### 当前用户
 GET http://127.0.0.1:8000/auth/me
 Authorization: Bearer fake-token-for-admin
+
+### 创建 TikTok 渠道数据源
+POST http://127.0.0.1:8000/channel-intelligence/sources
+Content-Type: application/json
+
+{
+  "shop": "ETCYY-US",
+  "account": "wardrobepicked",
+  "source_url": "https://www.tiktok.com/@wardrobepicked",
+  "is_active": true
+}
+
+### 查询数据源列表
+GET http://127.0.0.1:8000/channel-intelligence/sources
+
+### 触发指定数据源采集
+POST http://127.0.0.1:8000/channel-intelligence/sources/1/collect
+
+### 查询采集记录
+GET http://127.0.0.1:8000/channel-intelligence/collection-runs
+
+### 查询看板总览
+GET http://127.0.0.1:8000/channel-intelligence/summary
+
+### 查询完整看板数据
+GET http://127.0.0.1:8000/channel-intelligence/dashboard
+
+### 查询筛选项
+GET http://127.0.0.1:8000/channel-intelligence/filters
+
+### 查询视频列表
+GET http://127.0.0.1:8000/channel-intelligence/videos?page=1&page_size=20
+
+### 按店铺筛选视频
+GET http://127.0.0.1:8000/channel-intelligence/videos?shop=ETCYY-US&page=1&page_size=20
+
+### 查询内容信号
+GET http://127.0.0.1:8000/channel-intelligence/signals
